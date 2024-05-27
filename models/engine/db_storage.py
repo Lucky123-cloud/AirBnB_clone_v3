@@ -25,7 +25,7 @@ class DBStorage:
     __engine = None
     __session = None
 
-    def __init__(self):
+    def _init_(self):
         """Instantiate a DBStorage object"""
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
         HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
@@ -47,7 +47,7 @@ class DBStorage:
             if cls is None or cls is classes[clss] or cls is clss:
                 objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
-                    key = obj.__class__.__name__ + '.' + obj.id
+                    key = obj._class.name_ + '.' + obj.id
                     new_dict[key] = obj
         return (new_dict)
 
@@ -97,4 +97,4 @@ class DBStorage:
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
                 nobjects += len(self.__session.query(classes[clss]).all())
-        return nobjects
+        return nobjects
